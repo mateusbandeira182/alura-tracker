@@ -21,13 +21,11 @@
 
     import { defineComponent } from 'vue';
 
-    import { ADICIONA_PROJETO } from "@/store/mutations-type";
-
     import { TipoNotificacao } from "@/interfaces/INotificacao";
 
     import useNotificador from "@/hooks/notificador";
-    
-    import { ALTERAR_PROJETO } from "@/store/tipo-acoes";
+
+    import { ALTERAR_PROJETO, CADASTRAR_PROJETO } from "@/store/tipo-acoes";
 
     //import { noticacaoMixin } from "@/mixins/notificar";
 
@@ -42,9 +40,8 @@
             noticacaoMixin
         ], */
         mounted() {
-            console.log(this.store.state.projetos);
             if(this.id) {
-                const projeto = this.store.state.projetos.find(proj => proj.id === this.id);
+                const projeto = this.store.state.projetos.find((proj) => proj.id == this.id);
                 this.nomeDoProjeto = projeto?.nome || '';
             }
         },
@@ -56,19 +53,20 @@
         methods: {
             salvar() {
                 if(this.id) {
-                    this.store.commit(ALTERAR_PROJETO, {
+                    this.store.dispatch(ALTERAR_PROJETO, {
                         id: this.id,
                         nome: this.nomeDoProjeto
-                    });
+                    }).then(() => this.lidarComSucesso());
                 } else {
-                    this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
+                    this.store.dispatch(CADASTRAR_PROJETO, this.nomeDoProjeto).then(() => this.lidarComSucesso());
                 }
+                
+            },
+            lidarComSucesso() {
                 this.nomeDoProjeto = '';
-
                 this.notificar(TipoNotificacao.SUCESSO, 'Projeto Cadastrado', 'Pronto, seu projeto foi ser cadastrado');
-
                 this.$router.push('/projetos');
-            }
+            },
         },
         setup() {
             const store = useStore();
