@@ -1,6 +1,6 @@
 <template>
     <BoxVue>
-        <div class="columns" @click="tarefaClicada">
+        <div class="columns clicavel" @click="tarefaClicada">
             <div class="column is-4">
                 {{ tarefa.descricao || 'Tarefa sem descrição' }}
             </div>
@@ -32,19 +32,26 @@
                 required: true,
             }
         },
-        methods: {
-            tarefaClicada(): void {
-                this.$emit('aoTarefaClicada', this.tarefa);
+        setup(props, { emit }) {
+        
+            const tempoGasto = () : string => {
+                return new Date(props.tarefa.duracaoEmSegundos * 1000).toISOString().substring(11, 19);
             }
-        },
-        computed: {
-            tempoGasto() : string {
-                return new Date(this.tarefa.duracaoEmSegundos * 1000).toISOString().substring(11, 19);
+
+            const tarefaClicada = (): void => {
+                emit('aoTarefaClicada', props.tarefa);
+            }
+
+            return {
+                tempoGasto,
+                tarefaClicada
             }
         }
     });
 </script>
 
 <style scoped>
-   
+   .clicavel {
+    cursor: pointer;
+   }
 </style>

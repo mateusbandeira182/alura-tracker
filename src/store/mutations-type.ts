@@ -9,3 +9,5 @@ export const NOTIFICAR = 'NOTIFICAR';
 export const DEFINIR_TAREFAS = 'DEFINIR_TAREFAS';
 
 export const ADICIONA_TAREFA = 'ADICIONA_TAREFA';
+
+export const ALTERA_TAREFA = 'ALTERA_TAREFA';

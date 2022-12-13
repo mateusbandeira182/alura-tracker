@@ -27,6 +27,33 @@
         "nome": "Vue 3"
       },
       "id": 2
+    },
+    {
+      "duracaoEmSegundos": 5,
+      "descricao": "Refatoração do Projeto",
+      "projeto": {
+        "id": 1,
+        "nome": "Vue 3"
+      },
+      "id": 3
+    },
+    {
+      "duracaoEmSegundos": 7,
+      "descricao": "Dominando o mundo",
+      "projeto": {
+        "id": 2,
+        "nome": "ByteBank"
+      },
+      "id": 4
+    },
+    {
+      "duracaoEmSegundos": 6,
+      "descricao": "Tarefa",
+      "projeto": {
+        "id": 2,
+        "nome": "ByteBank"
+      },
+      "id": 5
     }
   ]
 }
